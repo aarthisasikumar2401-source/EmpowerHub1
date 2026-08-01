@@ -1,9 +1,10 @@
-// EMPOWER HUB - Dark / Light Mode Theme Context
+// EMPOWER HUB - Dark / Light Mode Theme Context (Updated)
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface ThemeContextType {
   isDark: boolean;
+  theme: 'dark' | 'light';
   toggleTheme: () => void;
 }
 
@@ -11,7 +12,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [isDark, setIsDark] = useState<boolean>(() => {
-    return localStorage.getItem('empower_theme') === 'dark' || true; // Default dark glassmorphism
+    return localStorage.getItem('empower_theme') === 'light' ? false : true; // Default dark
   });
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const toggleTheme = () => setIsDark(!isDark);
 
   return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+    <ThemeContext.Provider value={{ isDark, theme: isDark ? 'dark' : 'light', toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

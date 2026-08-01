@@ -22,8 +22,22 @@ import { MarketplacePage } from './pages/MarketplacePage';
 import { AIBusinessBuilderPage } from './pages/AIBusinessBuilderPage';
 import { FundingHubPage } from './pages/FundingHubPage';
 import { CommunityPage } from './pages/CommunityPage';
+import { LearnerDashboard } from './pages/LearnerDashboard';
 
 import { Toaster } from 'react-hot-toast';
+
+// Layout wrapper for pages WITH the global Navbar & Footer
+const WithNavbar: React.FC<{ children: React.ReactNode; onOpenAuth: () => void; onOpenAIChat: () => void }> = ({
+  children, onOpenAuth, onOpenAIChat
+}) => (
+  <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-[#0B0F17] text-gray-900 dark:text-gray-100 transition-colors duration-200">
+    <DemoRoleSwitcher />
+    <Navbar onOpenAuth={onOpenAuth} onOpenAIChat={onOpenAIChat} />
+    <main className="flex-1">{children}</main>
+    <Footer />
+    <VoiceAssistantButton />
+  </div>
+);
 
 export const App: React.FC = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -34,46 +48,41 @@ export const App: React.FC = () => {
       <AuthProvider>
         <ThemeProvider>
           <VoiceProvider>
-            
-            <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-[#0B0F17] text-gray-900 dark:text-gray-100 transition-colors duration-200">
-              
-              {/* Hackathon Presentation Role Bar */}
-              <DemoRoleSwitcher />
 
-              {/* Glassmorphic Navbar */}
-              <Navbar
-                onOpenAuth={() => setIsAuthOpen(true)}
-                onOpenAIChat={() => setIsAIChatOpen(true)}
-              />
+            <Routes>
+              {/* ===== LEARNER DASHBOARD — Standalone (no global navbar) ===== */}
+              <Route path="/learner" element={<LearnerDashboard />} />
+              <Route path="/learner/*" element={<LearnerDashboard />} />
 
-              {/* Route Views */}
-              <main className="flex-1">
-                <Routes>
-                  <Route path="/" element={<LandingPage onOpenAuth={() => setIsAuthOpen(true)} onOpenAIChat={() => setIsAIChatOpen(true)} />} />
-                  <Route path="/dashboard" element={<DashboardPage />} />
-                  <Route path="/forge" element={<AIOpportunityForgePage />} />
-                  <Route path="/tutor" element={<AITutorPage />} />
-                  <Route path="/marketplace" element={<MarketplacePage />} />
-                  <Route path="/business-builder" element={<AIBusinessBuilderPage />} />
-                  <Route path="/funding" element={<FundingHubPage />} />
-                  <Route path="/community" element={<CommunityPage />} />
-                </Routes>
-              </main>
+              {/* ===== ALL OTHER PAGES — With Global Navbar ===== */}
+              <Route path="/*" element={
+                <WithNavbar onOpenAuth={() => setIsAuthOpen(true)} onOpenAIChat={() => setIsAIChatOpen(true)}>
+                  <Routes>
+                    <Route path="/" element={<LandingPage onOpenAuth={() => setIsAuthOpen(true)} onOpenAIChat={() => setIsAIChatOpen(true)} />} />
+                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/forge" element={<AIOpportunityForgePage />} />
+                    <Route path="/tutor" element={<AITutorPage />} />
+                    <Route path="/marketplace" element={<MarketplacePage />} />
+                    <Route path="/business-builder" element={<AIBusinessBuilderPage />} />
+                    <Route path="/funding" element={<FundingHubPage />} />
+                    <Route path="/community" element={<CommunityPage />} />
+                  </Routes>
 
-              {/* Footer */}
-              <Footer />
+                  {/* Modals */}
+                  <GlobalAIChatModal isOpen={isAIChatOpen} onClose={() => setIsAIChatOpen(false)} />
+                  <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
+                </WithNavbar>
+              } />
+            </Routes>
 
-              {/* Floating Voice Microphone */}
-              <VoiceAssistantButton />
-
-              {/* Modals */}
-              <GlobalAIChatModal isOpen={isAIChatOpen} onClose={() => setIsAIChatOpen(false)} />
-              <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
-
-              {/* Toast Notifications */}
-              <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
-
-            </div>
+            {/* Toast Notifications — always rendered */}
+            <Toaster
+              position="top-right"
+              toastOptions={{
+                duration: 3000,
+                style: { background: '#1e293b', color: '#f1f5f9', border: '1px solid #334155', borderRadius: '12px' }
+              }}
+            />
 
           </VoiceProvider>
         </ThemeProvider>
