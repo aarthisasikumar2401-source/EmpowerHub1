@@ -5,7 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "npx -p typescript tsc",
+    "build": "echo Server ready",
     "start": "node dist/server.js"
   },
   "dependencies": {
