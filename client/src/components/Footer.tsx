@@ -10,10 +10,8 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
         
         <div className="space-y-3">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white">
-              <Zap className="w-4 h-4 text-amber-400 fill-amber-400" />
-            </div>
+          <div className="flex items-center gap-3">
+            <img src="/logo.png" alt="EMPOWER HUB Logo" className="h-10 w-auto object-contain" />
             <span className="font-extrabold text-lg text-gradient">EMPOWER HUB</span>
           </div>
           <p className="text-gray-500 dark:text-gray-400 text-[11px] leading-relaxed">

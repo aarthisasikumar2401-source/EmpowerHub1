@@ -38,9 +38,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose }) => {
         </button>
 
         <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 mx-auto flex items-center justify-center mb-2 shadow-lg">
-            <Sparkles className="w-6 h-6 text-amber-300" />
-          </div>
+          <img src="/logo.png" alt="EMPOWER HUB Logo" className="h-16 w-auto mx-auto mb-3 object-contain" />
           <h2 className="font-extrabold text-xl text-gradient">
             {isRegister ? 'Join EMPOWER HUB' : 'Sign In to EMPOWER HUB'}
           </h2>

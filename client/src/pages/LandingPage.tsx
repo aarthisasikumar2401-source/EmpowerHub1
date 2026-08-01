@@ -46,6 +46,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenAuth, onOpenAICh
           transition={{ duration: 0.6 }}
           className="space-y-6"
         >
+          {/* Official Logo Banner */}
+          <div className="flex justify-center mb-4">
+            <img src="/logo.png" alt="Empower Hub Official Logo" className="h-24 sm:h-32 w-auto object-contain drop-shadow-xl" />
+          </div>
+
           {/* Tagline Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700/50 text-blue-600 dark:text-blue-400 text-xs font-semibold shadow-sm">
             <Sparkles className="w-4 h-4 animate-spin text-amber-400" />

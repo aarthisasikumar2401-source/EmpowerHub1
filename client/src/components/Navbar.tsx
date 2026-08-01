@@ -60,15 +60,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAuth, onOpenAIChat }) => {
     <nav className="glass-nav sticky top-8 z-40 px-4 lg:px-8 py-3 transition-all duration-300">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
         
-        {/* Brand Logo & Tagline */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-pink-500 p-0.5 shadow-lg group-hover:scale-105 transition-transform">
-            <div className="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center">
-              <Zap className="w-5 h-5 text-amber-400 fill-amber-400" />
-            </div>
-          </div>
+        {/* Official Brand Logo */}
+        <Link to="/" className="flex items-center gap-3 group">
+          <img
+            src="/logo.png"
+            alt="EMPOWER HUB Official Logo"
+            className="h-10 w-auto object-contain transition-transform group-hover:scale-105"
+          />
           <div>
-            <span className="font-extrabold text-xl tracking-tight text-gradient">
+            <span className="font-extrabold text-xl tracking-tight text-gradient block">
               EMPOWER HUB
             </span>
             <span className="hidden xl:block text-[10px] text-gray-500 dark:text-gray-400 font-medium">
