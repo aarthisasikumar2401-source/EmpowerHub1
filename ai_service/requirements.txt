@@ -1,0 +1,12 @@
+langgraph
+langchain-core
+langchain-openai
+fastapi
+uvicorn
+livekit-agents
+livekit-api
+browser-use
+playwright
+openai
+python-dotenv
+supabase
